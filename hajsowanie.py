@@ -21,7 +21,8 @@ with open('pko.csv','r') as f:
 first_day = 0
 data = data[first_day:first_day+250]
 
-max_profit = -100
+
+'''max_profit = -100
 max_profit_avg_size = 0
 for avg_size in range(1,5):
 	money = data[0]
@@ -78,8 +79,31 @@ g_data2 = Gnuplot.Data(range(0, len(avg)), avg, with_="lines lt rgb 'blue'")
 g_data3 = Gnuplot.Data(range(0, len(sum_of_goods)), sum_of_goods, with_="lines lt rgb 'green'")
 gp.plot(g_data, g_data2, g_data3)
 
-raw_input()
+raw_input()'''
 
+def funduszowy_demon(data, money, avg_size):
+	cur_money = data[0]
+	shares = 0
 
+	last_buying_factor = -1
 
+	for it in range(0, len(data)):
+		beg = max(0, it-avg_size)
+
+		avg = avg_weights(data[beg:it+1])
+
+		cur_buying_factor = data[it] - avg
+		if last_buying_factor * cur_buying_factor < 0:
+			if last_buying_factor < 0 and cur_money > 0:
+				shares = cur_money / data[it]
+				cur_money = 0
+			elif shares > 0:
+				cur_money = shares * data[it]
+				shares = 0
+
+		last_buying_factor = cur_buying_factor
+
+	return cur_money + shares * data[-1] -money
+
+print funduszowy_demon(data, data[0], 3)
 
