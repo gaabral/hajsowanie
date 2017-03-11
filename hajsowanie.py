@@ -11,7 +11,7 @@ def avg_weights(arr):
 
 	return sum_weight/weight
 
-data = []
+'''data = []
 
 with open('mstfun/' + 'SKA002.mst','r') as f:
 	reader = csv.reader(f)
@@ -22,7 +22,7 @@ first_day = 0
 data = data[first_day:first_day+200]
 
 
-'''max_profit = -100
+max_profit = -100
 max_profit_avg_size = 0
 for avg_size in range(1,5):
 	money = data[0]
@@ -105,5 +105,5 @@ def funduszowy_demon(data, money, avg_size):
 
 	return cur_money + shares * data[-1] -money
 
-print funduszowy_demon(data, 100, 3)
+#print funduszowy_demon(data, 100, 3)
 
