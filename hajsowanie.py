@@ -82,7 +82,7 @@ gp.plot(g_data, g_data2, g_data3)
 raw_input()'''
 
 def funduszowy_demon(data, money, avg_size):
-	cur_money = data[0]
+	cur_money = money
 	shares = 0
 
 	last_buying_factor = -1
