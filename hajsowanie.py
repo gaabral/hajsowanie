@@ -105,5 +105,5 @@ def funduszowy_demon(data, money, avg_size):
 
 	return cur_money + shares * data[-1] -money
 
-print funduszowy_demon(data, data[0], 3)
+#print funduszowy_demon(data, data[0], 3)
 
