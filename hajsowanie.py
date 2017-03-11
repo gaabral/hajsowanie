@@ -13,13 +13,13 @@ def avg_weights(arr):
 
 data = []
 
-with open('pko.csv','r') as f:
+with open('mstfun/' + 'SKA002.mst','r') as f:
 	reader = csv.reader(f)
 	for row in reader:
 		if row[0] != "<TICKER>":
 			data += [float(row[5])]
 first_day = 0
-data = data[first_day:first_day+250]
+data = data[first_day:first_day+200]
 
 
 '''max_profit = -100
@@ -105,5 +105,5 @@ def funduszowy_demon(data, money, avg_size):
 
 	return cur_money + shares * data[-1] -money
 
-#print funduszowy_demon(data, data[0], 3)
+print funduszowy_demon(data, 100, 3)
 
