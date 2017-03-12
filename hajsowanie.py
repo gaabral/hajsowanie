@@ -107,3 +107,41 @@ def funduszowy_demon(data, money, avg_size):
 
 #print funduszowy_demon(data, 100, 3)
 
+
+
+def statystyki_demona(data, money, avg_size):
+	statsy = {}
+	ostatni_zakup = 0
+	hajs_ostatni_zakup = 0
+	cur_money = money
+	shares = 0
+
+	last_buying_factor = -1
+
+	for it in range(0, len(data)):
+		beg = max(0, it-avg_size)
+
+		avg = avg_weights(data[beg:it+1])
+
+		cur_buying_factor = data[it] - avg
+		if last_buying_factor * cur_buying_factor < 0:
+			if last_buying_factor < 0 and cur_money > 0:
+				shares = cur_money / data[it]
+				ostatni_zakup = it
+				hajs_ostatni_zakup = cur_money
+				cur_money = 0
+			elif shares > 0:
+				cur_money = shares * data[it]
+				shares = 0
+				dlugosc_transakcji = it - ostatni_zakup
+				zysk = (cur_money - hajs_ostatni_zakup)/hajs_ostatni_zakup * 100
+				if statsy.get(dlugosc_transakcji) == None:
+					statsy[dlugosc_transakcji] = (1,zysk)
+				else:
+					local_val = statsy[dlugosc_transakcji]
+					statsy[dlugosc_transakcji] = (local_val[0]+1, local_val[1]+zysk)
+
+		last_buying_factor = cur_buying_factor
+
+	return statsy
+
