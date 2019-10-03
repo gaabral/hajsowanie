@@ -1,2 +1,1 @@
-liczymy hajsik
-moja kontrybucja
+
